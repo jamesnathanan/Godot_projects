@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scripts/Game.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Trunk.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sprites/skybox_sideHills.png" type="Texture" id=3]
+[ext_resource path="res://sprites/dirt_grass.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sprites/Grave.png" type="Texture" id=6]
+[ext_resource path="res://PressStart2P-Regular.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 7 )
+
+[node name="Game" type="Node"]
+script = ExtResource( 1 )
+trunk_scene = ExtResource( 2 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 310.827, 631.125 )
+scale = Vector2( 2.56908, 2.56908 )
+z_index = -10
+texture = ExtResource( 3 )
+
+[node name="Ground" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( -224, -800 )
+scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tile" type="Sprite" parent="Ground"]
+position = Vector2( 160, 992 )
+texture = ExtResource( 4 )
+
+[node name="Tile2" type="Sprite" parent="Ground"]
+position = Vector2( 288, 992 )
+texture = ExtResource( 4 )
+
+[node name="Tile3" type="Sprite" parent="Ground"]
+position = Vector2( 416, 992 )
+texture = ExtResource( 4 )
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+position = Vector2( 576, 933.352 )
+
+[node name="FirstTrunkPosition" type="Position2D" parent="."]
+position = Vector2( 361, 933.352 )
+
+[node name="Grave" type="Sprite" parent="."]
+visible = false
+position = Vector2( 576, 960 )
+texture = ExtResource( 6 )
+
+[node name="TimeLeft" type="ProgressBar" parent="."]
+margin_left = 166.0
+margin_top = 104.0
+margin_right = 579.0
+margin_bottom = 147.0
+max_value = 5.0
+value = 5.0
+percent_visible = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.5
+
+[node name="Score" type="RichTextLabel" parent="."]
+margin_left = 265.0
+margin_top = 1107.0
+margin_right = 463.0
+margin_bottom = 1182.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "0"
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
