@@ -10,6 +10,19 @@ public class bulletBrain : Node
         
     }
 
+    public void _on_enemySpawner_timeout()
+    {
+        // GD.Print("Timer Works !");
+        spawnEnemy();
+    }
+
+    public void spawnEnemy()
+    {
+        Vector2 spawnPosition = new Vector2(Convert.ToSingle(GD.RandRange(0,1000)), -30);
+        Vector2 targetPosition = new Vector2(Convert.ToSingle(GD.RandRange(0,1000)), 550);
+        spawnBullet(spawnPosition, targetPosition, "enemy");
+    }
+
     public void spawnBullet(Vector2 spawnPosition, Vector2 targetPosition, string animationName)
     {
         // spawn bullet at position and look at target position
@@ -27,7 +40,7 @@ public class bulletBrain : Node
 
     public void spawnExplosion(Vector2 spawnPosition, string animationName)
     {
-        var explosion = (bullet)scenes._sceneExplosion.Instance();
+        var explosion = (Area2D)scenes._sceneExplosion.Instance();
         GetNode("/root/game/bullets").AddChild(explosion);
         explosion.GlobalPosition = spawnPosition;
 

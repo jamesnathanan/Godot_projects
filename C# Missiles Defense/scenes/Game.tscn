@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/tileMapStars.png" type="Texture" id=1]
 [ext_resource path="res://assets/tileMapGround.png" type="Texture" id=2]
 [ext_resource path="res://scenes/cannon.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/bulletBrain.cs" type="Script" id=4]
+[ext_resource path="res://scripts/player.cs" type="Script" id=5]
 
 [sub_resource type="TileSet" id=1]
 0/name = "tileMapStars.png 0"
@@ -37,6 +38,9 @@
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 524.658, 56.6473 )
+
 [node name="game" type="Node2D"]
 
 [node name="background" type="Node" parent="."]
@@ -58,8 +62,24 @@ tile_data = PoolIntArray( 131071, 0, 0, 65536, 0, 0, 65537, 0, 0 )
 [node name="bulletBrain" type="Node" parent="bullets"]
 script = ExtResource( 4 )
 
+[node name="enemySpawner" type="Timer" parent="bullets/bulletBrain"]
+wait_time = 3.0
+autostart = true
+
 [node name="foreground" type="Node" parent="."]
 
 [node name="cannon" parent="foreground" instance=ExtResource( 3 )]
 
 [node name="hud" type="Node" parent="."]
+
+[node name="player" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="playerHitZone" type="Area2D" parent="player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/playerHitZone"]
+position = Vector2( 518.68, 520.37 )
+shape = SubResource( 3 )
+
+[connection signal="timeout" from="bullets/bulletBrain/enemySpawner" to="bullets/bulletBrain" method="_on_enemySpawner_timeout"]
+[connection signal="area_entered" from="player/playerHitZone" to="player" method="_on_playerHitZone_area_entered"]
