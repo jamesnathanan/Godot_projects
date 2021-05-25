@@ -51,11 +51,11 @@ font_path = "res://assets/Chonburi Regular.ttf"
 size = 38
 font_data = SubResource( 4 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=6]
 size = 90
 font_data = ExtResource( 6 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 524.658, 56.6473 )
 
 [node name="game" type="Node2D"]
@@ -129,7 +129,7 @@ margin_left = -1.72437
 margin_top = 191.408
 margin_right = 1026.28
 margin_bottom = 440.408
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "GAME OVER"
 align = 1
 __meta__ = {
@@ -143,7 +143,7 @@ script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player/playerHitZone"]
 position = Vector2( 518.68, 523.493 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [connection signal="timeout" from="bullets/bulletBrain/enemySpawner" to="bullets/bulletBrain" method="_on_enemySpawner_timeout"]
 [connection signal="area_entered" from="player/playerHitZone" to="player" method="_on_playerHitZone_area_entered"]

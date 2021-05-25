@@ -4,12 +4,25 @@ using System;
 public class bulletBrain : Node
 {
     scenes scenes = new scenes();
+    Timer enemySpawner;
+    public float maxSpawnInterval = 4;
+    public float minSpawnInterval = 0.5f;
+    public float spawnIntervalDecrease = 0.2f;
+    public float spawnInterval = 0;
 
     public override void _Ready()
     {
-        
+        enemySpawner = (Timer)GetNode("enemySpawner");
+        spawnInterval = maxSpawnInterval;
     }
 
+    public void increaseDifficulty()
+    {
+        var newSpawnInterval = spawnInterval - spawnIntervalDecrease;
+        newSpawnInterval = Math.Max(newSpawnInterval, minSpawnInterval);
+        enemySpawner.WaitTime = newSpawnInterval;
+        enemySpawner.Start();
+    }
     public void _on_enemySpawner_timeout()
     {
         // GD.Print("Timer Works !");
