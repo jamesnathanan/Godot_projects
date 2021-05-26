@@ -78,9 +78,14 @@ tile_data = PoolIntArray( 131071, 0, 0, 65536, 0, 0, 65537, 0, 0 )
 
 [node name="bulletBrain" type="Node" parent="bullets"]
 script = ExtResource( 4 )
+playerBulletSpeed = 500
 
 [node name="enemySpawner" type="Timer" parent="bullets/bulletBrain"]
 wait_time = 3.0
+autostart = true
+
+[node name="cloudSpawner" type="Timer" parent="bullets/bulletBrain"]
+wait_time = 4.0
 autostart = true
 
 [node name="foreground" type="Node" parent="."]
@@ -146,4 +151,5 @@ position = Vector2( 518.68, 523.493 )
 shape = SubResource( 7 )
 
 [connection signal="timeout" from="bullets/bulletBrain/enemySpawner" to="bullets/bulletBrain" method="_on_enemySpawner_timeout"]
+[connection signal="timeout" from="bullets/bulletBrain/cloudSpawner" to="bullets/bulletBrain" method="_on_cloudSpawner_timeout"]
 [connection signal="area_entered" from="player/playerHitZone" to="player" method="_on_playerHitZone_area_entered"]

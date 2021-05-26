@@ -5,10 +5,12 @@ public class bulletBrain : Node
 {
     scenes scenes = new scenes();
     Timer enemySpawner;
-    public float maxSpawnInterval = 4;
-    public float minSpawnInterval = 0.5f;
-    public float spawnIntervalDecrease = 0.2f;
+    [Export] public float maxSpawnInterval = 4;
+    [Export] public float minSpawnInterval = 0.5f;
+    [Export] public float spawnIntervalDecrease = 0.2f;
     public float spawnInterval = 0;
+    [Export] public int playerBulletSpeed = 300;
+    [Export] public int enemyBulletSpeed = 250;
 
     public override void _Ready()
     {
@@ -27,6 +29,11 @@ public class bulletBrain : Node
     {
         // GD.Print("Timer Works !");
         spawnEnemy();
+    }
+
+    public void _on_cloudSpawner_timeout()
+    {
+        spawnCloud();
     }
 
     public void spawnEnemy()
@@ -49,6 +56,14 @@ public class bulletBrain : Node
         var bulletSprite = (AnimatedSprite)bullet.GetNode("AnimatedSprite");
         bulletSprite.Play(animationName);
 
+        if(animationName == "player")
+        {
+            bullet.speed = playerBulletSpeed;
+        } else if(animationName == "enemy")
+        {
+            bullet.speed = enemyBulletSpeed;
+        }
+
     }
 
     public void spawnExplosion(Vector2 spawnPosition, string animationName)
@@ -62,5 +77,17 @@ public class bulletBrain : Node
         explosionSprite.Play(animationName);
     }
 
+    public void spawnCloud()
+    {
+        var cloud = (AnimatedSprite)scenes._sceneCloud.Instance();
+        GetNode("/root/game/foreground").AddChild(cloud);
+
+        cloud.Frame = Convert.ToInt32(GD.RandRange(0, 3));
+        Vector2 spawnPosition = new Vector2(-100, Convert.ToSingle(GD.RandRange(0,400)));
+        cloud.GlobalPosition = spawnPosition;
+        var randomScale = Convert.ToSingle(GD.RandRange(0,1));
+        cloud.Scale = new Vector2(randomScale, randomScale);
+        GD.Print("cloud frame: " + cloud.Frame);
+    }
 
 }

@@ -5,7 +5,7 @@ public class player : Node
 {
     bulletBrain bulletBrain;
     public bool canShoot = true;
-    public int health = 3;
+    [Export] public int health = 3;
     public int score = 0;
     public bool gameOver = false; 
 
@@ -37,7 +37,8 @@ public class player : Node
             var gameOverScreen = (Node2D)GetNode("/root/game/hud/gameOverScreen");
             gameOverScreen.Visible = true;
             var cannon = (Node2D)GetNode("/root/game/foreground/cannon");
-            bulletBrain.spawnExplosion(cannon.GlobalPosition, "enemy");
+            // bulletBrain.spawnExplosion(cannon.GlobalPosition, "enemy");
+            bulletBrain.CallDeferred("spawnExplosion", cannon.GlobalPosition, "enemy");
             cannon.QueueFree();
         }
     }
@@ -65,7 +66,8 @@ public class player : Node
         var bulletType = (AnimatedSprite)bullet.GetNodeOrNull("AnimatedSprite");
         if( ((bulletType != null) && (bulletType.Animation == "enemy")) && (bullet is bullet))
         {
-            bulletBrain.spawnExplosion(bullet.GlobalPosition, "enemy");
+            // bulletBrain.spawnExplosion(bullet.GlobalPosition, "enemy");
+            bulletBrain.CallDeferred("spawnExplosion", bullet.GlobalPosition, "enemy");
             bullet.QueueFree();
             hitPlayer();
         }
