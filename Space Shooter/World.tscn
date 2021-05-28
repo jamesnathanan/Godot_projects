@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Ship.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=2]
+
+[node name="World" type="Node"]
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Ship" parent="." instance=ExtResource( 1 )]
+position = Vector2( 33.3887, 91.8853 )
+
+[node name="Enemy" parent="." instance=ExtResource( 2 )]
+position = Vector2( 200.787, 36.7639 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 214.927, 120.661 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 279.028, 63.6298 )
+
+[node name="Enemy4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 283.27, 165.909 )
