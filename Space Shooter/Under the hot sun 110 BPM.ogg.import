@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Under the hot sun 110 BPM.ogg-4f2a37214e15b7745bd724cdc7930786.oggstr"
+
+[deps]
+
+source_file="res://Under the hot sun 110 BPM.ogg"
+dest_files=[ "res://.import/Under the hot sun 110 BPM.ogg-4f2a37214e15b7745bd724cdc7930786.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

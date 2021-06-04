@@ -1,7 +1,7 @@
 extends Node
 
 var score = 0 setget set_score
-onready var scoreLabel = $Score
+onready var scoreLabel = $ScoreLabel
 
 func set_score(value):
 	score = value
@@ -9,3 +9,8 @@ func set_score(value):
 
 
 	
+
+
+func _on_Ship_player_death():
+	yield(get_tree().create_timer(1), "timeout")
+	get_tree().change_scene("res://GameOverScreen.tscn")
