@@ -21,6 +21,7 @@ run/main_scene="res://StartMenu.tscn"
 [autoload]
 
 Music="*res://Music.tscn"
+SaveAndLoad="*res://SaveAndLoad.gd"
 
 [display]
 
